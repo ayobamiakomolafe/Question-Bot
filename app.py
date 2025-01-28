@@ -1,10 +1,14 @@
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
+
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
-from dotenv import load_dotenv
 import os
 import time
 import streamlit as st
@@ -20,9 +24,10 @@ dico = {"Barbara J. Aehlert - ACLS Study Guide-Elsevier (2021)": 11,
         "Graeme MacLaren, Daniel Brodie, Roberto Lorusso, Giles Peek, Ravi Thiagarajan, Leen Vercaemst - Extracorporeal Life Support-The ELSO Red Book, 6e-Extracorporeal Life Support Organization (2022)" : 35,
         "Mulroney, Susan E._Myers, Adam K._Netter, Frank Henry - Netter's essential physiology-Elsevier (2016)" : 20}
 
-load_dotenv()
-api_key_1 = "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"
-api_key_2 = "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"
+
+
+api_key_1 = st.secrets["GROQ_API_KEY_1"]
+api_key_2 = st.secrets["GROQ_API_KEY_2"]
 
 # Streamed response emulator
 def response_generator(response):
