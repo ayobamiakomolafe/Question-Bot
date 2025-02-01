@@ -43,7 +43,7 @@ db = FAISS.load_local("Question_Setting", embeddings, allow_dangerous_deserializ
 
 retriever = db.as_retriever(search_kwargs={"k": 20})
 
-llm_1 = ChatGroq(temperature=0, model_name="llama-3.3-70b-versatile", api_key = api_key_1 )
+llm_1 = ChatGroq(temperature=0, model_name="DeepSeek-R1-Distill-Llama-70b", api_key = api_key_1 )
 
 llm_2 = ChatGroq(temperature=0, model_name="llama-3.3-70b-versatile", api_key = api_key_2)
 
