@@ -54,11 +54,12 @@ system_prompt = (
     Be a mix of 1st order (recall and comprehension) and 2nd order (application and analysis) types of questions.
     Ensure that one of the answer options is correct.
     Randomly position the correct answer among the four options. The correct answer should always be bolded.
-    Ensure the questions are not repeated.
+    Ensure the questions are UNIQUE AND not repeated.
     
     Example Input: “Create 4 Clinical Application questions in the category of Patient Monitoring.”
 
-    Response Format: 
+ 
+    ENSURE Response Format IS LIKE THIS: 
     [question]
     A) [option A]
     B) [option B]
