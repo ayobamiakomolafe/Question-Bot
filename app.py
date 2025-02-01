@@ -58,11 +58,13 @@ system_prompt = (
     
     Example Input: “Create 4 Clinical Application questions in the category of Patient Monitoring.”
 
-    Response Format: [Question Text]
-    A. [Option]
-    B. [Option]
-    C. [Option]
-    D. [Option]
+    Response Format: 
+    Question: [question]
+    A) [option A]
+    B) [option B]
+    C) [option C]
+    D) [option D]
+    Correct Answer: [correct option]
 
     Note:
 
