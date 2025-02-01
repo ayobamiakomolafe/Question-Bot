@@ -41,11 +41,11 @@ embeddings = FastEmbedEmbeddings(model_name="BAAI/bge-base-en-v1.5")
 
 db = FAISS.load_local("Question_Setting", embeddings, allow_dangerous_deserialization=True)
 
-retriever = db.as_retriever(search_kwargs={"k": 20})
+retriever = db.as_retriever(search_kwargs={"k": 40})
 
 llm_1 = ChatGroq(temperature=0, model_name="DeepSeek-R1-Distill-Llama-70b", api_key = api_key_1 )
 
-llm_2 = ChatGroq(temperature=0, model_name="llama-3.3-70b-versatile", api_key = api_key_2)
+llm_2 = ChatGroq(temperature=0, model_name="DeepSeek-R1-Distill-Llama-70b", api_key = api_key_2)
 
 system_prompt = (
     """
@@ -105,11 +105,15 @@ def response_generate(query):
         rag_chain = create_retrieval_chain(retriever, question_answer_chain)
         result = rag_chain.invoke({"input": query})
         result_answer = result['answer']
+        idx = result_answer.rfind("</think>")
+        result_answer = result_answer[idx::].strip()
     except:
         question_answer_chain = create_stuff_documents_chain(llm_2, prompt)
         rag_chain = create_retrieval_chain(retriever, question_answer_chain)
         result = rag_chain.invoke({"input": query})
         result_answer = result['answer']
+        idx = result_answer.rfind("</think>")
+        result_answer = result_answer[idx::].strip()
 
     formatted_response = f"{result_answer}\n\nRelevant Sources:\n"
 
