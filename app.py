@@ -90,8 +90,8 @@ def response_generate(query):
         rag_chain = create_retrieval_chain(retriever, question_answer_chain)
         result = rag_chain.invoke({"input": query})
         result_answer = result['answer']
-        idx = result_answer.rfind("</think>")
-        result_answer = result_answer[idx::].strip()
+        #idx = result_answer.rfind("</think>")
+        #result_answer = result_answer[idx::].strip()
     except:
         question_answer_chain = create_stuff_documents_chain(llm_2, prompt)
         rag_chain = create_retrieval_chain(retriever, question_answer_chain)
