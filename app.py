@@ -43,7 +43,7 @@ db = FAISS.load_local("Question_Setting", embeddings, allow_dangerous_deserializ
 
 retriever = db.as_retriever(search_kwargs={"k": 30})
 
-llm_1 = ChatGroq(temperature=0, model_name="gemma2-9b-it", api_key = api_key_1 )
+llm_1 = ChatGroq(temperature=0, model_name="DeepSeek-R1-Distill-Llama-70b", api_key = api_key_1 )
 
 llm_2 = ChatGroq(temperature=0, model_name="DeepSeek-R1-Distill-Llama-70b", api_key = api_key_2)
 
@@ -90,8 +90,8 @@ def response_generate(query):
         rag_chain = create_retrieval_chain(retriever, question_answer_chain)
         result = rag_chain.invoke({"input": query})
         result_answer = result['answer']
-        #idx = result_answer.rfind("</think>")
-        #result_answer = result_answer[idx::].strip()
+        idx = result_answer.rfind("</think>")
+        result_answer = result_answer[idx::].strip()
     except:
         question_answer_chain = create_stuff_documents_chain(llm_2, prompt)
         rag_chain = create_retrieval_chain(retriever, question_answer_chain)
