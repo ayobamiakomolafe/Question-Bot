@@ -41,7 +41,7 @@ embeddings = FastEmbedEmbeddings(model_name="BAAI/bge-base-en-v1.5")
 
 db = FAISS.load_local("Question_Setting", embeddings, allow_dangerous_deserialization=True)
 
-retriever = db.as_retriever(search_kwargs={"k": 30})
+retriever = db.as_retriever(search_kwargs={"k": 36})
 
 llm_1 = ChatGroq(temperature=0, model_name="DeepSeek-R1-Distill-Llama-70b", api_key = api_key_1 )
 
@@ -54,26 +54,8 @@ system_prompt = (
     Be a mix of 1st order (recall and comprehension) and 2nd order (application and analysis) types of questions.
     Ensure that one of the answer options is correct.
     Randomly position the correct answer among the four options. The correct answer should always be bolded.
-    Align the content of the question with the specified category and subcategory.
-
-    Categories:
-        A. Clinical Application
-        B. Basic Science
-    Subcategories:
-        Anatomy and Physiology
-        Pharmacology
-        Pathology
-        Laboratory Analysis
-        Quality Assurance
-        Devices and Equipment
-        Clinical Management
-        Special Patient Groups
-        Special Procedures and Techniques
-        Catastrophic Events and Device Failure
-        Patient Monitoring
-
-    User Input Format: “Create [number] [Category] questions in the category of [Subcategory].”
-
+    Ensure the questions are not repeated.
+    
     Example Input: “Create 4 Clinical Application questions in the category of Patient Monitoring.”
 
     Response Format: [Question Text]
