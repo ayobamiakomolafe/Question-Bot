@@ -55,10 +55,29 @@ system_prompt = (
     Ensure that one of the answer options is correct.
     Randomly position the correct answer among the four options. The correct answer should always be bolded.
     Ensure the questions are UNIQUE AND not repeated.
+
+    Align the content of the question with the specified category and subcategory.
+
+    Categories:
+        A. Clinical Application
+        B. Basic Science
+    Subcategories:
+        Anatomy and Physiology
+        Pharmacology
+        Pathology
+        Laboratory Analysis
+        Quality Assurance
+        Devices and Equipment
+        Clinical Management
+        Special Patient Groups
+        Special Procedures and Techniques
+        Catastrophic Events and Device Failure
+        Patient Monitoring
+
+    User Input Format: “Create [number] [Category] questions in the category of [Subcategory].”
     
     Example Input: “Create 4 Clinical Application questions in the category of Patient Monitoring.”
-
- 
+    
     ENSURE Response Format IS LIKE THIS: 
     [question]
     A) [option A]
