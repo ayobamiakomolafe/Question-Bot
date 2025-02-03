@@ -41,7 +41,7 @@ embeddings = FastEmbedEmbeddings(model_name="BAAI/bge-base-en-v1.5")
 
 db = FAISS.load_local("Question_Setting", embeddings, allow_dangerous_deserialization=True)
 
-retriever = db.as_retriever(search_kwargs={"k": 20})
+retriever = db.as_retriever(search_kwargs={"k": 25})
 
 llm_1 = ChatGroq(temperature=0, model_name="DeepSeek-R1-Distill-Llama-70b", api_key = api_key_1 )
 
