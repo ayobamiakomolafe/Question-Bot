@@ -41,7 +41,7 @@ db = FAISS.load_local("Question_Setting", embeddings, allow_dangerous_deserializ
 
 retriever = db.as_retriever(search_kwargs={"k": 40})
 
-llm = ChatOpenAI(model_name="gpt-4o", temperature=0.5, max_tokens = None)
+llm = ChatOpenAI(model_name="gpt-4o",  max_tokens = None)
 
 system_prompt = (
     """
@@ -63,7 +63,7 @@ system_prompt = (
     Note:
     Ensure no question is repeated exactly the same way.
     Ensure the questions are balanced in terms of difficulty (both easy and challenging).
-    Create the questions using the context below and ensure questions are unique
+    Create the questions using the context below alone and ensure questions are unique
     """ 
     "\n\n"
     "{context}"
