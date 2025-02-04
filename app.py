@@ -1,3 +1,7 @@
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 from langchain_groq import ChatGroq
@@ -21,13 +25,8 @@ dico = {"Barbara J. Aehlert - ACLS Study Guide-Elsevier (2021)": 11,
         "Graeme MacLaren, Daniel Brodie, Roberto Lorusso, Giles Peek, Ravi Thiagarajan, Leen Vercaemst - Extracorporeal Life Support-The ELSO Red Book, 6e-Extracorporeal Life Support Organization (2022)" : 35,
         "Mulroney, Susan E._Myers, Adam K._Netter, Frank Henry - Netter's essential physiology-Elsevier (2016)" : 20}
 
-load_dotenv()
 
-api_key_1 = "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"
-api_key_2 = "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"
-api_key = "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"
-
-os.environ["OPENAI_API_KEY"] = api_key
+os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
 
 # Streamed response emulator
 def response_generator(response):
