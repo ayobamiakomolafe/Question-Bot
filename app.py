@@ -9,7 +9,6 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_openai import OpenAI, ChatOpenAI
-from dotenv import load_dotenv
 import os
 import time
 import streamlit as st
@@ -53,8 +52,10 @@ system_prompt = (
     You are an AI assistant designed to create multiple-choice exam questions. Your task is to generate questions that are relevant to the input given. Each question must:
     Include four answer options (labeled A, B, C, and D).
     Be a mix of 1st order (recall and comprehension) and 2nd order (application and analysis) types of questions.
+    Ensure questions are different and not repeated.
     Ensure that one of the answer options is correct.
     Randomly position the correct answer among the four options. The correct answer should always be bolded.
+    
     
     Response Format: 
     Question Text
@@ -64,7 +65,7 @@ system_prompt = (
     D. [Option]
 
     Note:
-
+    Ensure no question is repeated exactly the same way.
     Ensure the questions are balanced in terms of difficulty (both easy and challenging).
     Create the questions using the context below and ensure questions are unique
     """ 
