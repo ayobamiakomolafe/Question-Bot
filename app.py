@@ -44,7 +44,7 @@ You are an Assistant that Generates examination worthy multiple-choice question 
 {question} based on the above context but don't add details like 'Based on the above text or context' to questions.
 """
 
-retriever = db.as_retriever(search_kwargs={"k": 40})
+
 model = ChatOpenAI(model_name="gpt-4o", temperature=0.5, max_tokens = None)
 prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
 
